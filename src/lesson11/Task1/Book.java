@@ -1,4 +1,4 @@
-package lesson11;
+package lesson11.Task1;
 
 public class Book {
     String title;

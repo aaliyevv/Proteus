@@ -1,4 +1,4 @@
-package lesson11;
+package lesson11.Task1;
 
 public class LibraryManager {
     public static void main(String[] args) throws InterruptedException {
