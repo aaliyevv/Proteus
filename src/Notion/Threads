@@ -1,0 +1,64 @@
+# Threads
+
+- General knowledge
+    - A process is a program, and a thread is a task within a program.
+    - Concurrency is the rapid switching between tasks, while Parallelism is the simultaneous execution of tasks.
+    - In Java we can create thread with `implements Runnable` and `Runnable with Lambda`.
+    - We must call **`start()`** method in order to start the new thread.
+    - Multiple directions changing the same information can lead to a serious problem called a Race Condition.
+- Process and Thread
+
+    A process is an independent execution environment that encapsulates a running program(like restaurant).
+
+    A thread is a lightweight unit of execution that exists within a process. There can be multiple threads within a process, and they share the process's resources (memory, files) among themselves. This shared memory allows for efficient communication between threads. Let’s say each  waiter (thread) serves different tables (process) using the same kitchen (memory).
+
+    In short: A process is a program itself, while threads are separate tasks that are executed simultaneously within that program.
+
+- Concurrency and Parallelism
+
+    Concurrency: The management of multiple tasks on a single-core processor. Processor switches between tasks quickly that seems to us they are happening simultaneously.
+
+    Parallelism: A multi-core processor is one that actually executes multiple tasks at the same time. Each task runs on a separate core.
+
+- Why we need?
+
+
+    1. Preventing UI "Freezes": For example, you are loading a large file in an application. Without multithreading, the application's buttons will not work until the file is loaded, meaning the application will "freeze." While another thread loads the file in the background, the main thread continues to interact with the user.
+
+    1. Maximum Utilization(usage) of Processor Resources: Modern processors have multiple cores. Thanks to multi-core, we can make our programs faster by using all of these cores.
+
+    1. Enhance Performance: Increasing Performance: Some complex calculations or tasks can be divided into multiple directions to significantly reduce the overall execution time.
+
+- Thread Lifecycle
+
+    `Thread myThread = new Thread();` → `start`**(RUNNABLE)** → **RUNNING** → **BLOCKED/WAITING → TERMINATED**
+
+    **BLOCKED/WAITING - maybe waiting for another thread to finish its work or reading the data from file.**
+
+- Create Thread`implements Runnable`
+
+
+    ![image.png](attachment:a8098a5f-b5a3-4339-9149-866a055052c5:image.png)
+
+    ![image.png](attachment:c743e58e-0830-4de8-9b3c-90f70a0768f4:image.png)
+
+- Create Thread `Runnable with Lambda`
+
+
+    ![image.png](attachment:160ce9fc-b1b3-45aa-8bd9-0ee6b385490d:image.png)
+
+- **`start()`** vs **`run()`**
+    - `thread.start()`: Create new thread and inside this thread calls `run()` method.
+    - `thread.run()`: Not create a new thread. Just in current (main) thread call the  `run()` method as a simple method. Parallelism does not occur.
+- Race Condition
+
+
+    ![image.png](attachment:0ca05394-79b0-4cd8-a584-c98671b2a374:image.png)
+
+    Every time we will get for instance, 178 453, 191 234 but never 200 000. Because `say++`  operation is not atomar, it consists of 3 steps in the background.
+
+    1. Read the value of `say`
+    2. Increase the read value
+    3. Return the new value
+
+    Problem occurs when one thread perform the first step before performing the third step, the processor switches to the other thread. This leads to data loss, we can bring example from ATM. The solution of this issue names ***synchronization***.
