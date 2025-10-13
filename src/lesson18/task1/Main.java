@@ -1,5 +1,7 @@
 package lesson18.task1;
 
+import lesson18.task1.GameSettings;
+
 public class Main {
     public static void main(String[] args) {
         GameSettings settings1 = GameSettings.getInstance();
