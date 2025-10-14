@@ -1,5 +1,5 @@
 package lesson18.task2;
 
-public interface Image {
+ interface Image {
     void displayImage(String fileName);
-}
+ }
